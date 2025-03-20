@@ -1,5 +1,8 @@
 package se.lexicon;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * The NameRepository class provides methods to manage a list of names.
  * It offers functionalities such as adding, removing, finding, and updating names.
@@ -15,8 +18,8 @@ public class NameRepository {
      * @return The number of elements in the names array.
      */
     public static int getSize() {
-        //todo: implement getSize method
-        return 0;
+
+        return names.length;
     }
 
 
@@ -26,7 +29,7 @@ public class NameRepository {
      * @param names The array of names to set.
      */
     public static void setNames(String[] names) {
-        //todo: implement setNames method
+            NameRepository.names = names;
     }
 
 
@@ -34,7 +37,7 @@ public class NameRepository {
      * Clears the names array by creating a new empty array.
      */
     public static void clear() {
-        //todo: implement clear method
+        NameRepository.names = new String[0];
     }
 
 
@@ -44,8 +47,8 @@ public class NameRepository {
      * @return A new array containing all elements from the names array.
      */
     public static String[] findAll() {
-        //todo: implement findAll method
-        return null;
+        String[] newArrayCopy = Arrays.copyOf(names, names.length);
+        return newArrayCopy;
     }
 
 
@@ -56,7 +59,11 @@ public class NameRepository {
      * @return The matching name if found; otherwise, null.
      */
     public static String find(String fullName) {
-        //todo: implement find method
+        for (int i = 0; i < names.length; i++) {
+            if (Objects.equals(names[i], fullName)) {
+                return names[i];
+            }
+        }
         return null;
     }
 
@@ -68,8 +75,16 @@ public class NameRepository {
      * @return True if the fullName is added successfully; false if it already exists.
      */
     public static boolean add(String fullName) {
-        //todo: implement add method
-        return false;
+        for (String i : names) {
+            if (Objects.equals(i , fullName)) {
+                return false;
+            }
+        }
+        String[] newArray = Arrays.copyOf(names, names.length + 1);
+        newArray[newArray.length - 1] = fullName;
+        names = newArray; //Update names array
+        return true;
+
     }
 
 
